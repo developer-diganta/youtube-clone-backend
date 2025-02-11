@@ -111,7 +111,6 @@ minioClient.makeBucket("videobucket", "us-east-1", function (err) {
     console.log("Bucket 'videoBucket' created successfully.");
 });
 
-
 app.get("/protected", authenticateToken, (req, res) => {
     res.json({ message: "You have access!", user: req.user });
 });

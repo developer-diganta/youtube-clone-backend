@@ -6,7 +6,7 @@ const passport = require("passport");
 const cors = require("cors");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const startMongooseConnection = require("./configs/mongoose.connect");
-const { addVideo } = require("./controllers/Video/videoController");
+const { addVideo, getVideosOfUser } = require("./controllers/Video/videoController");
 startMongooseConnection();
 const app = express();
 app.use(cors())
@@ -122,6 +122,7 @@ app.get("/", (req, res) => {
 })
 
 app.post("/api/v1/video/upload", authenticateToken, upload, addVideo);
+app.get("/api/v1/video", authenticateToken, getVideosOfUser);
 
 app.listen(3000, () => {
     console.log("RUNNING ON 3000")

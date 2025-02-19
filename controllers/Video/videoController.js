@@ -1,4 +1,4 @@
-const { addVideoService } = require("../../services/Video/videoServices");
+const { addVideoService, getVideosOfUserService } = require("../../services/Video/videoServices");
 
 addVideo = async (req, res) => {
     const videoFile = req.files.videoFile[0]; // Video file
@@ -6,6 +6,7 @@ addVideo = async (req, res) => {
     const userId = req.user.id;
     console.log(req.body)
     const videoDetails = {
+        userId,
         title: req.body.title,
         description: req.body.description,
         public: req.body.public,
@@ -22,6 +23,17 @@ addVideo = async (req, res) => {
 
 }
 
+getVideosOfUser = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const response = await getVideosOfUserService(userId);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).send("Error in fetching videos")
+    }
+}
+
 module.exports = {
-    addVideo
+    addVideo,
+    getVideosOfUser,
 }

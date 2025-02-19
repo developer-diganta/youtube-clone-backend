@@ -16,7 +16,7 @@ const videoModelSchema = new mongoose.Schema({
     },
     thumbnails: {
         type: Array,
-        required: true
+        // required: true
     },
     description: {
         type: String,
